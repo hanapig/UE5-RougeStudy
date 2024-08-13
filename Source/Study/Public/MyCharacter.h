@@ -37,9 +37,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	void MoveW(const FInputActionValue& value);
-	void MoveS(const FInputActionValue& value);
+	/*void MoveS(const FInputActionValue& value);*/
 	void MoveD(const FInputActionValue& value);
-	void MoveA(const FInputActionValue& value);
+	/*void MoveA(const FInputActionValue& value);*/
 	void MoveX(const FInputActionValue& val);
 	void MoveY(const FInputActionValue& val);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")

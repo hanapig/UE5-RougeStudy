@@ -55,8 +55,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	if (Input)
 	{
 		Input->BindAction(W, ETriggerEvent::Triggered, this, &AMyCharacter::MoveW);
-		Input->BindAction(S, ETriggerEvent::Triggered, this, &AMyCharacter::MoveS);
-		Input->BindAction(A, ETriggerEvent::Triggered, this, &AMyCharacter::MoveA);
+		Input->BindAction(S, ETriggerEvent::Triggered, this, &AMyCharacter::MoveW);
+		Input->BindAction(A, ETriggerEvent::Triggered, this, &AMyCharacter::MoveD);
 		Input->BindAction(D, ETriggerEvent::Triggered, this, &AMyCharacter::MoveD);
 		Input->BindAction(MX, ETriggerEvent::Triggered, this, &AMyCharacter::MoveX);
 		Input->BindAction(MY, ETriggerEvent::Triggered, this, &AMyCharacter::MoveY);
@@ -70,11 +70,11 @@ void AMyCharacter::MoveW(const FInputActionValue& value)
 	AddMovementInput(GetActorForwardVector(), WValue);
 }
 
-void AMyCharacter::MoveS(const FInputActionValue& value)
-{
-	float WValue = value.Get<float>();
-	AddMovementInput(GetActorForwardVector(), WValue);
-}
+//void AMyCharacter::MoveS(const FInputActionValue& value)
+//{
+//	float WValue = value.Get<float>();
+//	AddMovementInput(GetActorForwardVector(), WValue);
+//}
 
 void AMyCharacter::MoveD(const FInputActionValue& value)
 {
@@ -82,11 +82,11 @@ void AMyCharacter::MoveD(const FInputActionValue& value)
 	AddMovementInput(GetActorRightVector(), WValue);
 }
 
-void AMyCharacter::MoveA(const FInputActionValue& value)
-{
-	float WValue = value.Get<float>();
-	AddMovementInput(GetActorRightVector(), WValue);
-}
+//void AMyCharacter::MoveA(const FInputActionValue& value)
+//{
+//	float WValue = value.Get<float>();
+//	AddMovementInput(GetActorRightVector(), WValue);
+//}
 
 void AMyCharacter::MoveX(const FInputActionValue& val)
 {
