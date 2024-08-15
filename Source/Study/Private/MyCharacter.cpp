@@ -22,14 +22,17 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AMyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	UEventsinterface* com = Cast<UEventsinterface>(GetComponentByClass(UEventsinterface::StaticClass()));
+	if (com)
+	{
+		com->Collisioninterface();
+	}
 }
 
 // Called to bind functionality to input

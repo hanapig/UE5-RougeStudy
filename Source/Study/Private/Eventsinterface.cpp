@@ -34,14 +34,22 @@ void UEventsinterface::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UEventsinterface::Collisioninterface()
 {
+	UE_LOG(LogTemp, Warning, TEXT("1"));
 	AActor* My = GetOwner();
+
 	FVector start;
-	FVector end;
+	FRotator send;
+	My->GetActorEyesViewPoint(start, send);
+	FVector end = start + (send.Vector() * 1000);
 	FCollisionObjectQueryParams objects;//碰撞对象类型
 	objects.AddObjectTypesToQuery(ECC_WorldDynamic);
 	FHitResult Hit;
 	GetWorld()->LineTraceSingleByObjectType(Hit, start, end, objects);//射线位置及对象
 	AActor* Hitactor = Hit.GetActor();//击中对象
+	if(Hitactor)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("test"));
+	}
 	if (Hitactor)
 	{
 		if (Hitactor->Implements<UMyInterface>())//射线命中对象是否有接口函数

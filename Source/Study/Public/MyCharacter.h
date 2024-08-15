@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "EnhancedInputSubsystems.h"
+#include "MyInterface.h"
+#include "Eventsinterface.h"
 #include "EnhancedInputComponent.h"
 #include "InputMappingContext.h"
 #include "GameFramework\SpringArmComponent.h"
