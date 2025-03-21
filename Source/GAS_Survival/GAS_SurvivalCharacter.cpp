@@ -43,7 +43,10 @@ AGAS_SurvivalCharacter::AGAS_SurvivalCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	bReplicates = true;
+	bAlwaysRelevant = true;
 }
+
 
 void AGAS_SurvivalCharacter::Tick(float DeltaSeconds)
 {

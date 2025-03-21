@@ -7,6 +7,7 @@
 AGAS_SurvivalGameMode::AGAS_SurvivalGameMode()
 {
 	// 构造函数实现
+	bUseSeamlessTravel = true;
 }
 
 
@@ -24,6 +25,8 @@ void AGAS_SurvivalGameMode::PostLogin(APlayerController* NewPlayer)
 			PlayerControllers.Add(PC);
 		}
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("1"));
 	
 }
 
@@ -39,16 +42,7 @@ void AGAS_SurvivalGameMode::CheckAllPlayersReady()
 			return;
 		}
 	}
-
-	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
-	{
-		AGAS_SurvivalPlayerController* PC = Cast<AGAS_SurvivalPlayerController>(*It);
-		if (PC)
-		{
-		
-			PC->ClientTravel("/Game/Map/Map1", ETravelType::TRAVEL_Absolute);
-		}
-	}
 	
-	UGameplayStatics::OpenLevel(this, FName("Map1"));
+	
+	GetWorld()->ServerTravel("/Game/Map/Map1?listen");
 }

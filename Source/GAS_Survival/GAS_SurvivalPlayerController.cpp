@@ -10,6 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "GAS_GameInstance.h"
+#include "GAS_PlayerState.h"
 #include "GAS_SurvivalGameMode.h"
 #include "Engine/LocalPlayer.h"
 #include "Kismet/GameplayStatics.h"
@@ -142,6 +144,7 @@ void AGAS_SurvivalPlayerController::OnTouchReleased()
 	OnSetDestinationReleased();
 }
 
+
 void AGAS_SurvivalPlayerController::SwitchCharacterRequest(int32 Direction)
 {
 
@@ -173,6 +176,7 @@ bool AGAS_SurvivalPlayerController::ServerSwitchCharacterRequest_Validate(int32 
     return true;
 }
 
+
 void AGAS_SurvivalPlayerController::ServerSwitchCharacterRequest_Implementation(int32 Direction)
 {
 
@@ -191,18 +195,30 @@ void AGAS_SurvivalPlayerController::ServerSwitchCharacterRequest_Implementation(
 
 void AGAS_SurvivalPlayerController::SwitchCharacter(int32 NewIndex)
 {
-	if (!AvailableCharacters.IsValidIndex(NewIndex))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("SwitchCharacter: Invalid index %d"), NewIndex);
-		return;
-	}
-
+	
 	ACharacter* NewChar = AvailableCharacters[NewIndex];
 	if (NewChar)
 	{
 	
 		Possess(NewChar);
+
+		AGAS_PlayerState* MyPS = GetPlayerState<AGAS_PlayerState>();
+		if (MyPS && HasAuthority())  
+		{
+			MyPS->SelectedCharacterIndex = NewIndex;
+			UE_LOG(LogTemp, Warning, TEXT("SwitchCharacter: NewIndex = %d"), NewIndex);
+
+
+			UGAS_GameInstance* GI = Cast<UGAS_GameInstance>(GetGameInstance());
+			if (GI)
+			{
+				GI->SelectedCharacterIndex = NewIndex;  // YourSelectedIndex 为你选中的角色索引
+			}
+
+		}
+		
 	}
+	
 }
 
 
